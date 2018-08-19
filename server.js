@@ -41,8 +41,15 @@ app.get('/', (req, res) => {
     res.render('home.hbs',{
         name: 'Purush',
         likes : ['Bike', 'car'],
-        pageName : 'Home page',
-        copyRight : new Date().getFullYear()
+        pageName : 'Home page'
+    });
+})
+
+app.get('/projects', (req, res) => {
+    res.render('projects.hbs',{
+        name: 'Purush',
+        projects : ['Weather app', 'web server', 'react app'],
+        pageName : 'Project page'
     });
 })
 
