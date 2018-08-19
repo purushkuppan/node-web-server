@@ -2,7 +2,7 @@ const express = require('express')
 const hbs = require('hbs')
 const fs1 = require('fs')
 
-
+const port = process.env.PORT || 4000
 var app = express();
 
 app.set( 'hbs')
@@ -25,16 +25,17 @@ app.use((req, res, next) =>{
     var now =new Date().toString();
     var log = `${now}`+`${req.method}`+`${req.url}` + '\n'
     fs1.appendFile('serverlog.log', `${log}` , (err) => {
-        console.log('Unable to load')
+        if(err)
+        console.log('Unable to load', err)
     })
 
     next()
 })
 
 
-app.use((req, res, next) =>{
+/*app.use((req, res, next) =>{
     res.render('maintain.hbs')
-})
+})*/
 
 app.get('/', (req, res) => {
     res.render('home.hbs',{
@@ -58,6 +59,6 @@ app.get('/bad', (req, res) => {
     });
 })
 
-app.listen(4000, () => {
-    console.log ('App started-->')
+app.listen(port, () => {
+    console.log (`Server is up in port ${port} `)
 });
